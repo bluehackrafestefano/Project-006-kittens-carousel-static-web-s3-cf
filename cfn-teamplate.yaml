@@ -17,8 +17,15 @@ Resources:
   KittensBucket:
     Type: AWS::S3::Bucket
     Properties:
-      AccessControl: PublicRead
       BucketName: !Ref KittensDomainName
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
       WebsiteConfiguration:
         IndexDocument: index.html
   KittensBucketPolicy:
